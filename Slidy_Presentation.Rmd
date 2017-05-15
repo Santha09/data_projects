@@ -1,0 +1,54 @@
+---
+title: "John Hopkins Data Project Assignment"
+author: "Santha Krishnasamy"
+date: "5/14/2017"
+output: slidy_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## About the presentation
+
+This is a presentation to perform a single variate regression analysis on Motor Trend cars data
+
+## Pitching:
+
+We tried to perform the single variate analysis against the Motor Trend cars data to understand how the Miles Per Galon is related to only the highly correlated variables like Auto or Manual Transmission, Number of Cylinders and Weight of the Engine.
+
+1. Between the mpg and the dependent variable AM:
+    We could see based on the analysis results that Manual has a greater postive impact on miles per galon
+2. Between the mpg and the dependet variable Number of cylinder
+    The relationship is negative impact that a the number of cyclidners increases the mpg decreases but the performance of the car other than mpg always increases which we never get to study in this dataset
+3. Between the mpg and the dependet variable Weight of the Engine
+    The relationship is also has very high negative impact that as weight of the engine increases the mpg decreases.
+
+# We will see how the regression analysis against mpg and independent variable Auto/Manual Transmission 
+```{r , echo = TRUE}
+mpgdata    <- mtcars
+mpgdata$am <- factor(mpgdata$am, labels = c("Automatic","Manual"))
+    
+Model <- lm(mpg~as.factor(am), mpgdata)
+summary(Model)
+plot(mpg~as.factor(am), data = mpgdata)
+      abline(Model, col = "red")
+```
+
+# We next will see how the regression analysis against mpg and independent variable number of cylinder 
+```{r , echo = TRUE}
+Model <- lm(mpg~as.factor(cyl), mpgdata)
+summary(Model)
+plot(mpg~as.factor(am), data = mpgdata)
+      abline(Model, col = "red")
+```
+
+# We next will see how the regression analysis against mpg and Weight of the Engine
+```{r , echo = TRUE}
+Model <- lm(mpg~wt, mpgdata)
+summary(Model)
+plot(mpg~as.factor(am), data = mpgdata)
+      abline(Model, col = "red")
+```
+
+
